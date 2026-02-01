@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\DesafioSpedy.Application\DesafioSpedy.Application.csproj" />
+    <ProjectReference Include="..\DesafioSpedy.Exceptions\DesafioSpedy.Exceptions.csproj" />
+    <ProjectReference Include="..\DesafioSpedy.Infrastructure\DesafioSpedy.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

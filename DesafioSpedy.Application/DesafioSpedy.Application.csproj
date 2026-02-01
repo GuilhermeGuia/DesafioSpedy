@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DesafioSpedy.Domain\DesafioSpedy.Domain.csproj" />
+    <ProjectReference Include="..\DesafioSpedy.Exceptions\DesafioSpedy.Exceptions.csproj" />
+  </ItemGroup>
+
 </Project>
