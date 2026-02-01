@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioSpedy.Api", "DesafioSpedy.Api\DesafioSpedy.Api.csproj", "{FF7F9B48-66BA-4591-ABBB-6225C8AF847C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioSpedy.Application", "DesafioSpedy.Application\DesafioSpedy.Application.csproj", "{62FD5F93-D9E0-3A45-8875-B328778206FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioSpedy.Domain", "DesafioSpedy.Domain\DesafioSpedy.Domain.csproj", "{8B96E2E9-872F-7661-723C-A945CC8E896B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioSpedy.Exceptions", "DesafioSpedy.Exceptions\DesafioSpedy.Exceptions.csproj", "{54A54F87-8FAF-AD69-B158-2D4F6502ABA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioSpedy.Infrastructure", "DesafioSpedy.Infrastructure\DesafioSpedy.Infrastructure.csproj", "{F47C2E2B-6E0C-0492-447F-095E1E752713}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF7F9B48-66BA-4591-ABBB-6225C8AF847C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7F9B48-66BA-4591-ABBB-6225C8AF847C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7F9B48-66BA-4591-ABBB-6225C8AF847C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7F9B48-66BA-4591-ABBB-6225C8AF847C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FD5F93-D9E0-3A45-8875-B328778206FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FD5F93-D9E0-3A45-8875-B328778206FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FD5F93-D9E0-3A45-8875-B328778206FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FD5F93-D9E0-3A45-8875-B328778206FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B96E2E9-872F-7661-723C-A945CC8E896B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B96E2E9-872F-7661-723C-A945CC8E896B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B96E2E9-872F-7661-723C-A945CC8E896B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B96E2E9-872F-7661-723C-A945CC8E896B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A54F87-8FAF-AD69-B158-2D4F6502ABA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A54F87-8FAF-AD69-B158-2D4F6502ABA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A54F87-8FAF-AD69-B158-2D4F6502ABA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A54F87-8FAF-AD69-B158-2D4F6502ABA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F47C2E2B-6E0C-0492-447F-095E1E752713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F47C2E2B-6E0C-0492-447F-095E1E752713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F47C2E2B-6E0C-0492-447F-095E1E752713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F47C2E2B-6E0C-0492-447F-095E1E752713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64ECF44C-3757-466F-A1CE-7A29EB89C566}
+	EndGlobalSection
+EndGlobal

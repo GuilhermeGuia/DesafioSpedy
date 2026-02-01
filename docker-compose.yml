@@ -1,0 +1,32 @@
+services:
+  desafiospedy.api:
+    image: ${DOCKER_REGISTRY-}desafiospedyapi
+    container_name: desafiospedy.api
+    build:
+      context: .
+      dockerfile: DesafioSpedy.Api/Dockerfile
+    depends_on:
+      - desafiospedy.db
+
+  desafiospedy.db:
+    image: postgres:17
+    container_name: desafiospedy.db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: desafiospedy2026
+      POSTGRES_DB: desafiospedydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.containers/desafiospedydb:/var/lib/postgresql/data
+
+  desafiospedy.pgadmin:
+    image: dpage/pgadmin4
+    container_name: desafiospedy.pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: teste1234
+    ports:
+      - "5050:80"
+    depends_on:
+      - desafiospedy.db
