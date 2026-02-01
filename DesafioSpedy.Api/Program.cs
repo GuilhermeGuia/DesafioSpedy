@@ -1,4 +1,9 @@
 using DesafioSpedy.Api.Filters;
+using DesafioSpedy.Application;
+using DesafioSpedy.Infrastructure;
+using DesafioSpedy.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +16,21 @@ builder.Services.AddMvc(options =>
     options.Filters.Add<ResponseFilter>();
 });
 
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DesafioSpedyDbContext>();
+    db.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
