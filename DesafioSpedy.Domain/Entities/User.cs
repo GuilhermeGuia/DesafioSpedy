@@ -1,4 +1,5 @@
 ﻿using DesafioSpedy.Domain.Crypto;
+using DesafioSpedy.Exceptions.Base;
 
 namespace DesafioSpedy.Domain.Entities;
 
@@ -11,8 +12,7 @@ public class User : EntityBase
     public void ValidarLogin(string password, IPasswordEncryptor encryptor)
     {
         if (!encryptor.Verify(password, Password))
-            throw new Exception("Email ou Senha incorretos.");
-            //throw new CredenciaisInvalidasException();
+            throw new CredenciaisInvalidasException("Email ou Senha incorretos.");
     }
 
 }
