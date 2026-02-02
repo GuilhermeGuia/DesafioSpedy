@@ -1,4 +1,6 @@
 ﻿using DesafioSpedy.Application.Services;
+using DesafioSpedy.Application.Validators;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DesafioSpedy.Application;

@@ -2,6 +2,7 @@ using DesafioSpedy.Api.Filters;
 using DesafioSpedy.Application;
 using DesafioSpedy.Infrastructure;
 using DesafioSpedy.Infrastructure.DataAccess;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ResponseFilter>();
