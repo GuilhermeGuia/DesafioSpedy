@@ -3,7 +3,6 @@ using DesafioSpedy.Application;
 using DesafioSpedy.Infrastructure;
 using DesafioSpedy.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ResponseFilter>();
+    options.Filters.Add<ExceptionGlobalFilter>();
 });
 
 builder.Services.AddInfrastructure(builder.Configuration);
