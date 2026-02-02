@@ -20,7 +20,8 @@ public class AuthenticationService(IAuthRepository _authRepository, IPasswordEnc
         if (user == null)
             throw new CredenciaisInvalidasException("Email ou Senha incorretos.");
 
-        user.ValidarLogin(dto.Password, _encryptor);
+        if(!_encryptor.Verify(dto.Password, user.Password))
+            throw new CredenciaisInvalidasException("Email ou Senha incorretos.");
 
         var token = _jwtGenerator.GenerateToken(user.Id, user.Name, user.Email);
 
