@@ -19,5 +19,6 @@ public static class ApplicationDependecyInjection
     public static void AddValidators(IServiceCollection services)
     {
         services.AddValidatorsFromAssemblyContaining<CredentialsValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTicketValidator>();
     }
 }
