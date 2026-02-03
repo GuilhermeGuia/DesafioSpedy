@@ -5,10 +5,8 @@ namespace DesafioSpedy.Api.Controllers;
 
 [Route("api/auth")]
 [ApiController]
-public class AuthController(AuthenticationService authenticationService) : ControllerBase
+public class AuthController(AuthenticationService _authenticationService) : ControllerBase
 {
-    private readonly AuthenticationService _authenticationService = authenticationService;
-
     [HttpPost("login")]
     [ProducesResponseType(typeof(LoginResponseDto), StatusCodes.Status201Created)]
     public async Task<IActionResult> Login(
