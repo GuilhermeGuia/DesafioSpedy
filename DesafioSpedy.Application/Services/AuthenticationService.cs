@@ -7,7 +7,7 @@ using FluentValidation;
 
 namespace DesafioSpedy.Application.Services;
 
-public class AuthenticationService(IAuthRepository _authRepository, IPasswordEncryptor _encryptor, IJwtGenerator _jwtGenerator, IValidator<CredentialsDto> _validator)
+public class AuthenticationService(IUserRepository _authRepository, IPasswordEncryptor _encryptor, IJwtGenerator _jwtGenerator, IValidator<CredentialsDto> _validator)
 {
     public async Task<LoginResponseDto> Login(CredentialsDto dto)
     {

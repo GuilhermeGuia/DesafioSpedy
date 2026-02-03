@@ -31,7 +31,7 @@ public static class InfrastructureDependecyInjection
 
     public static void AddRepositories(IServiceCollection services)
     {
-        services.AddScoped<IAuthRepository, AuthRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
     }
     public static void AddCrypto(IServiceCollection services)
     {
