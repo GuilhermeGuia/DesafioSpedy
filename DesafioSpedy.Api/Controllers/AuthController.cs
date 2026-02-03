@@ -17,6 +17,6 @@ public class AuthController(AuthenticationService authenticationService) : Contr
     {
         var result = await _authenticationService.Login(dto);
 
-        return Ok(result);
+        return Created(string.Empty, result);
     }
 }
