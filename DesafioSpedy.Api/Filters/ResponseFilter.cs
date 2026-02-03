@@ -18,13 +18,19 @@ public class ResponseFilter : IActionFilter
 
         if (value is null)
         {
-            context.Result = new ObjectResult(new BaseRequest<string>(string.Empty));
+            context.Result = new ObjectResult(new BaseRequest<string>(string.Empty))
+            {
+                StatusCode = objectResult.StatusCode
+            };
             return;
         }
 
         var responseType = typeof(BaseRequest<>).MakeGenericType(value.GetType());
         var responseInstance = Activator.CreateInstance(responseType, value);
-        context.Result = new ObjectResult(responseInstance);
+        context.Result = new ObjectResult(responseInstance)
+        {
+            StatusCode = objectResult.StatusCode
+        };
     }
 
     public void OnActionExecuting(ActionExecutingContext context)
