@@ -2,8 +2,8 @@
 
 public class EntityBase
 {
-    public Guid Id { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdateAt { get; set; }
-    public DateTime DeleteAt { get; set; }
+    public Guid Id { get; protected set; }
+    public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
+    public DateTime? UpdateAt { get; protected set; }
+    public DateTime? DeleteAt { get; protected set; }
 }
