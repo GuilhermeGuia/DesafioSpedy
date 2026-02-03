@@ -32,6 +32,8 @@ public static class InfrastructureDependecyInjection
     public static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ITicketRepository, TicketRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
     public static void AddCrypto(IServiceCollection services)
     {
