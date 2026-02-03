@@ -3,6 +3,7 @@ using System;
 using DesafioSpedy.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioSpedy.Infrastructure.Migrations
 {
     [DbContext(typeof(DesafioSpedyDbContext))]
-    partial class DesafioSpedyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260203023034_CreateTicket")]
+    partial class CreateTicket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

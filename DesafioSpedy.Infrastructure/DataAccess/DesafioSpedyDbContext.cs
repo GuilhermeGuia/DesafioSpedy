@@ -9,6 +9,7 @@ public class DesafioSpedyDbContext : DbContext
 
     #region DBSETS
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Ticket> Ticket { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
