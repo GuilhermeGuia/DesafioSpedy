@@ -15,6 +15,7 @@ public static class ApplicationDependecyInjection
     public static void AddServices(IServiceCollection services)
     {
         services.AddScoped<AuthenticationService>();
+        services.AddScoped<TicketService>();
     }
     public static void AddValidators(IServiceCollection services)
     {
