@@ -1,12 +1,13 @@
 ﻿using DesafioSpedy.Application.Dtos.Base;
 using DesafioSpedy.Application.Dtos.Ticket;
 using DesafioSpedy.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace DesafioSpedy.Api.Controllers;
 
-[Route("api/auth")]
+[Route("api/ticket")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class TicketController(TicketService _ticketService) : ControllerBase
 {
 
