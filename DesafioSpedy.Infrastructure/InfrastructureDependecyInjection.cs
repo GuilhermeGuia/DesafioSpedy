@@ -1,9 +1,11 @@
 ﻿using DesafioSpedy.Domain.Authorization;
 using DesafioSpedy.Domain.Crypto;
+using DesafioSpedy.Domain.Http;
 using DesafioSpedy.Domain.Repositories;
 using DesafioSpedy.Infrastructure.Crypto;
 using DesafioSpedy.Infrastructure.DataAccess;
 using DesafioSpedy.Infrastructure.DataAccess.Repositories;
+using DesafioSpedy.Infrastructure.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ public static class InfrastructureDependecyInjection
         AddDbContext(services, configuration);
         AddRepositories(services);
         AddCrypto(services);
+        AddHttp(services);
     }
 
     public static void AddDbContext(IServiceCollection services, IConfiguration configuration)
@@ -39,5 +42,10 @@ public static class InfrastructureDependecyInjection
     {
         services.AddScoped<IPasswordEncryptor, PasswordEncryptor>();
         services.AddScoped<IJwtGenerator, JwtGenerator>();
+    }
+
+    public static void AddHttp(IServiceCollection services)
+    {
+        services.AddScoped<ICurrentUser, CurrentUser>();
     }
 }

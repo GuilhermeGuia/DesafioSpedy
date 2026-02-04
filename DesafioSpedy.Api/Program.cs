@@ -19,6 +19,8 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ExceptionGlobalFilter>();
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings"));
 
