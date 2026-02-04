@@ -24,13 +24,28 @@ builder.Services.Configure<JwtSettings>(
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
+var app = builder.Build();
+    
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowSpecificOrigin");
+
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
@@ -38,11 +53,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-MigrateAndSeedDatabaseAsync();
+await MigrateAndSeedDatabaseAsync();
 
 app.Run();
 
-void MigrateAndSeedDatabaseAsync()
+async Task MigrateAndSeedDatabaseAsync()
 {
     using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
@@ -50,6 +65,6 @@ void MigrateAndSeedDatabaseAsync()
     var db = services.GetRequiredService<DesafioSpedyDbContext>();
     var passwordEncryptor = services.GetRequiredService<IPasswordEncryptor>();
 
-    db.Database.MigrateAsync();
-    DbInitializer.Seed(db, passwordEncryptor);
+    await db.Database.MigrateAsync();
+    await DbInitializer.Seed(db, passwordEncryptor);
 }
