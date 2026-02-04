@@ -3,13 +3,14 @@ using DesafioSpedy.Application.Dtos.Ticket;
 using DesafioSpedy.Application.Extensions;
 using DesafioSpedy.Application.Tickets.Mappings;
 using DesafioSpedy.Domain.Entities;
+using DesafioSpedy.Domain.Http;
 using DesafioSpedy.Domain.Repositories;
 using DesafioSpedy.Exceptions.Base;
 using FluentValidation;
 
 namespace DesafioSpedy.Application.Services;
 
-public class TicketService(IValidator<CreateTicketDto> _validator, IUserRepository _userRepository, ITicketRepository _ticketRepository, IUnitOfWork _unitOfWork)
+public class TicketService(IValidator<CreateTicketDto> _validator, IUserRepository _userRepository, ITicketRepository _ticketRepository, IUnitOfWork _unitOfWork, ICurrentUser _currentUser)
 {
     public PagedResult<GetTicketDto> GetAllAsync(GetTicketFilterDto filters)
     {
@@ -38,17 +39,32 @@ public class TicketService(IValidator<CreateTicketDto> _validator, IUserReposito
         if (!validationResult.IsValid)
             throw new CreateTicketException(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
 
-        var assignedUser = _userRepository.GetById(dto.AssignedUserId);
-        if(assignedUser == null)
-            throw new CreateTicketException("Usuário atribuído não encontrado.");
+        var responsableUserId = _userRepository.GetById(dto.ResponsableUserId);
+        if(responsableUserId == null)
+            throw new CreateTicketException("Usuário responsável não encontrado.");
 
-        var mappedDto = new Ticket(dto.Title, dto.Description, dto.Priority, dto.AssignedUserId);
+        var createdByUserId = _currentUser.UserId;
+
+        var mappedDto = new Ticket(dto.Title, dto.Description, dto.Priority, dto.ResponsableUserId, createdByUserId);
 
         await _ticketRepository.CreateAsync(mappedDto);
 
         await _unitOfWork.SaveChangesAsync();
 
+        // nao retorna dados do criador nem do responsavel -> analisar
         return TicketResponseDto.From(mappedDto);
+    }
+
+    public async Task AvancarTicket(Guid Id)
+    {
+        var ticket = await _ticketRepository.FindAsync(Id);
+
+        if (ticket == null)
+            throw new DeleteTicketException("Ticket não encontrado.");
+
+        ticket.AvancarStatus();
+
+        await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task Delete(Guid Id)

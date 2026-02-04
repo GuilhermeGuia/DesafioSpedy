@@ -7,10 +7,8 @@ public class TicketResponseDto
     public string Description { get; set; }
     public string Priority { get; set; }
     public string Status  { get; set; }
-    public Guid AssignedUserId { get; set; }
     public DateTime CreatedAt { get; set; }
-
-    public static TicketResponseDto From(DesafioSpedy.Domain.Entities.Ticket ticket)
+    public static TicketResponseDto From(Domain.Entities.Ticket ticket)
     {
         return new TicketResponseDto
         {
@@ -19,7 +17,6 @@ public class TicketResponseDto
             Description = ticket.Description,
             Status = ticket.Status.ToString(),
             Priority = ticket.Priority.ToString(),
-            AssignedUserId = ticket.AssignedUserId,
             CreatedAt = ticket.CreatedAt
         };
     }
