@@ -2,18 +2,13 @@
 
 namespace DesafioSpedy.Exceptions.Base;
 
-public class CreateTicketException : DesafioSpedyException
+public class DeleteTicketException : DesafioSpedyException
 {
     private readonly IList<string> _errorMessages;
-    public CreateTicketException(string errorMessage) : base(errorMessage)
+    public DeleteTicketException(string errorMessage) : base(errorMessage)
     {
         _errorMessages = [errorMessage];
     }
-    public CreateTicketException(List<string> errorMessages) : base("Erro cadastro de ticket")
-    {
-        _errorMessages = errorMessages;
-    }
-
     public override HttpStatusCode GetStatusCode() => HttpStatusCode.BadRequest;
     public override IList<string> GetErrorMessages() => _errorMessages;
 }

@@ -28,4 +28,11 @@ public class Ticket : EntityBase
     public bool IsDeleted { get; private set; }
     public Guid AssignedUserId { get; private set; }
     public User User { get; private set; }
+
+    public void DeletarTicket()
+    {
+        IsDeleted = true;
+        UpdateAt = DateTime.UtcNow;
+        ClosedAt = DateTime.UtcNow;
+    }
 }

@@ -3,5 +3,7 @@ namespace DesafioSpedy.Domain.Repositories;
 
 public interface ITicketRepository
 {
-    Task CreateTicket(Ticket ticket);
+    Task CreateAsync(Ticket ticket);
+    IQueryable<Ticket> Query();
+    Task<Ticket?> FindAsync(Guid Id);
 }

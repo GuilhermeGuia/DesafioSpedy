@@ -17,4 +17,8 @@
     <ProjectReference Include="..\DesafioSpedy.Exceptions\DesafioSpedy.Exceptions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
 </Project>
