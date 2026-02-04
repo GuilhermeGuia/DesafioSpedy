@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin } from "../queries/useLogin";
-import { FormInput } from "../components/FormInput";
-import { ErrorBox } from "../components/ErrorBox";
 import { useState } from "react";
-import { loginSchema, type LoginFormData } from "../schemas/login.schema";
 import { Eye, EyeClosed } from "lucide-react";
-import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../queries/useLogin";
+import { useAuth } from "../../auth/useAuth";
+import { loginSchema, type LoginFormData } from "../../schemas/login.schema";
+import { ErrorBox } from "../../components/ErrorBox";
+import { FormInput } from "../../components/FormInput";
 
 export function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);

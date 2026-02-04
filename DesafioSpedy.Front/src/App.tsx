@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthLayout } from './layouts/AuthLayout'
 import { AppLayout } from './layouts/AppLayout'
-import { Login } from './pages/Login'
-import { TicketsList } from './pages/TicketsList'
 import { PublicRoute } from './auth/PublicRoute'
 import { PrivateRoute } from './auth/PrivateRoute'
+import { Login } from './pages/Login/Login'
+import { TicketListPage } from './pages/Tickets/TicketListPage'
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
 
         <Route element={<PrivateRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/tickets" element={<TicketsList />} />
+            <Route path="/tickets" element={<TicketListPage />} />
           </Route>
         </Route>
 
