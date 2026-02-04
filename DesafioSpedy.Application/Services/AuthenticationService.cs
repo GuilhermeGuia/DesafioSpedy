@@ -13,7 +13,7 @@ public class AuthenticationService(IUserRepository _authRepository, IPasswordEnc
     {
         var validationResult = await _validator.ValidateAsync(dto);
         if(!validationResult.IsValid)
-            throw new CredenciaisInvalidasException("");
+            throw new CredenciaisInvalidasException(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
 
         var user = await _authRepository.GetByEmail(dto.Email);
 
