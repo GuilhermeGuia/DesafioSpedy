@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { AuthContext } from "./AuthContext";
+import { storage } from '../utils/storage';
+
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
+    !!storage.getToken()
   );
 
   function login(token: string) {
-    localStorage.setItem("token", token);
+    storage.setToken(token)
     setIsAuthenticated(true);
   }
 
   function logout() {
-    localStorage.removeItem("token");
+    storage.clear();
     setIsAuthenticated(false);
   }
 

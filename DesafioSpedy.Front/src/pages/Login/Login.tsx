@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../queries/useLogin";
 import { useAuth } from "../../auth/useAuth";
 import { loginSchema, type LoginFormData } from "../../schemas/login.schema";
-import { ErrorBox } from "../../components/ErrorBox";
-import { FormInput } from "../../components/FormInput";
+import { ErrorBox } from "../../components/login/ErrorBox";
+import { FormInput } from "../../components/login/FormInput";
 
 export function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
