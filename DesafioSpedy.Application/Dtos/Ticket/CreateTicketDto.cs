@@ -6,6 +6,6 @@ public class CreateTicketDto
 {
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public ETicketPriority Priority { get; private set; }
-    public Guid ResponsableUserId { get; private set; }
+    public ETicketPriority Priority { get; set; }
+    public Guid ResponsableUserId { get; set; }
 }

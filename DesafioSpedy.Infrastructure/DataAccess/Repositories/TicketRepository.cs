@@ -12,7 +12,7 @@ public class TicketRepository(DesafioSpedyDbContext _db) : ITicketRepository
     }
     public IQueryable<Ticket> Query()
     {
-        return _db.Ticket.AsQueryable();
+        return _db.Ticket.Include(x => x.Creator).Include(x => x.Responsable).AsQueryable();
     }
     public async Task<Ticket?> FindAsync(Guid Id)
     {

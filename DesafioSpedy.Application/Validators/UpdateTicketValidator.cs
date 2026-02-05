@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DesafioSpedy.Application.Validators;
 
-public class CreateTicketValidator : AbstractValidator<CreateTicketDto>
+public class UpdateTicketValidator : AbstractValidator<UpdateTicketDto>
 {
-    public CreateTicketValidator()
+    public UpdateTicketValidator()
     {
         RuleFor(x => x.Title)
         .NotEmpty().WithMessage("O título é obrigatório.")

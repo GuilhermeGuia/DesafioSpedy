@@ -7,6 +7,9 @@ services:
       dockerfile: DesafioSpedy.Api/Dockerfile
     depends_on:
       - desafiospedy.db
+    ports:
+      - "5000:8080"
+      - "5001:8081"
 
   desafiospedy.db:
     image: postgres:17

@@ -34,7 +34,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    var secretKey = builder.Configuration.GetSection("JwtSettings").GetSection("SecretKey").Value!;
+    var secretKey = builder.Configuration.GetSection("JwtSettings").GetSection("Secret").Value!;
 
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -97,6 +97,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.UseHttpsRedirection();

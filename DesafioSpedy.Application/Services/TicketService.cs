@@ -10,7 +10,7 @@ using FluentValidation;
 
 namespace DesafioSpedy.Application.Services;
 
-public class TicketService(IValidator<CreateTicketDto> _validator, IUserRepository _userRepository, ITicketRepository _ticketRepository, IUnitOfWork _unitOfWork, ICurrentUser _currentUser)
+public class TicketService(IValidator<CreateTicketDto> _validateCreateTicket, IValidator<UpdateTicketDto> _validateUpdateTicket, IUserRepository _userRepository, ITicketRepository _ticketRepository, IUnitOfWork _unitOfWork, ICurrentUser _currentUser)
 {
     public PagedResult<GetTicketDto> GetAllAsync(GetTicketFilterDto filters)
     {
@@ -35,12 +35,12 @@ public class TicketService(IValidator<CreateTicketDto> _validator, IUserReposito
 
     public async Task<TicketResponseDto> Create(CreateTicketDto dto)
     {
-        var validationResult = await _validator.ValidateAsync(dto);
+        var validationResult = await _validateCreateTicket.ValidateAsync(dto);
         if (!validationResult.IsValid)
             throw new CreateTicketException(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
 
         var responsableUserId = _userRepository.GetById(dto.ResponsableUserId);
-        if(responsableUserId == null)
+        if (responsableUserId == null)
             throw new CreateTicketException("Usuário responsável não encontrado.");
 
         var createdByUserId = _currentUser.UserId;
@@ -51,12 +51,34 @@ public class TicketService(IValidator<CreateTicketDto> _validator, IUserReposito
 
         await _unitOfWork.SaveChangesAsync();
 
-        // nao retorna dados do criador nem do responsavel -> analisar
         return TicketResponseDto.From(mappedDto);
+    }
+
+    public async Task<TicketResponseDto> Update(UpdateTicketDto dto)
+    {
+        var validationResult = await _validateUpdateTicket.ValidateAsync(dto);
+        if (!validationResult.IsValid)
+            throw new UpdateStatusTicketException(validationResult.Errors.Select(e => e.ErrorMessage).ToList());
+
+        var responsableUserId = _userRepository.GetById(dto.ResponsableUserId);
+        if (responsableUserId == null)
+            throw new UpdateStatusTicketException("Usuário responsável não encontrado.");
+
+        var ticket = await _ticketRepository.FindAsync(dto.Id);
+
+        if (ticket == null)
+            throw new DeleteTicketException("Ticket não encontrado.");
+
+        ticket.AtualizarDados(dto.Title, dto.Description, dto.Priority, dto.ResponsableUserId);
+
+        await _unitOfWork.SaveChangesAsync();
+
+        return TicketResponseDto.From(ticket);
     }
 
     public async Task AvancarTicket(Guid Id)
     {
+
         var ticket = await _ticketRepository.FindAsync(Id);
 
         if (ticket == null)
@@ -73,9 +95,6 @@ public class TicketService(IValidator<CreateTicketDto> _validator, IUserReposito
 
         if(ticket == null)
             throw new DeleteTicketException("Ticket não encontrado.");
-
-        if(ticket.Status == Domain.ValueObjects.Ticket.ETicketStatus.Finished)
-            throw new DeleteTicketException("Ticket possui status finalizado.");
 
         ticket.DeletarTicket();
 

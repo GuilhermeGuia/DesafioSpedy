@@ -20,8 +20,8 @@ public class CurrentUser : ICurrentUser
             var userIdClaim = _httpContextAccessor
                 .HttpContext?
                 .User?
-                .FindFirst(ClaimTypes.NameIdentifier)
-                ?.Value;
+                .FindFirst("idUsuario")?
+                .Value;
 
             if (string.IsNullOrWhiteSpace(userIdClaim))
                 throw new InvalidOperationException("Usuário não autenticado");

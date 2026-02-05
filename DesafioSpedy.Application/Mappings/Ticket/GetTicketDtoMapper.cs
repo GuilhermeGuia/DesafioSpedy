@@ -9,14 +9,17 @@ public static class TicketMappings
     {
         return new GetTicketDto
         {
-            Id = ticket.Id.ToString(),
+            Id = ticket.Id,
             Title = ticket.Title,
             Description = ticket.Description,
-            Status = ticket.Status.ToString(),
-            Priority = ticket.Priority.ToString(),
-            AssignedUserId = ticket.AssignedUserId.ToString(),
-            ClosedAt = ticket.ClosedAt,
-            IsDeleted = ticket.IsDeleted
+            Status = (int) ticket.Status,
+            Priority = (int) ticket.Priority,
+            ResponsableUserId = ticket.ResponsableUserId,
+            ClosedAt = ticket.FinishedAt,
+            CreatedAt = ticket.CreatedAt,
+            IsDeleted = ticket.IsDeleted,
+            CreatorName = ticket.Creator.Name,
+            ResponsableName = ticket.Responsable.Name
         };
     }
 }

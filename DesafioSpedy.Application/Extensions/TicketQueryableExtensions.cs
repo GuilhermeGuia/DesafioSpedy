@@ -1,5 +1,6 @@
 ﻿using DesafioSpedy.Application.Dtos.Ticket;
 using DesafioSpedy.Domain.Entities;
+using DesafioSpedy.Domain.ValueObjects.Ticket;
 
 namespace DesafioSpedy.Application.Extensions;
 
@@ -9,21 +10,21 @@ public static class TicketQueryableExtensions
     this IQueryable<Ticket> query,
     GetTicketFilterDto filters)
     {
-        if (!string.IsNullOrWhiteSpace(filters.Status))
-            query = query.Where(x => x.Status.ToString() == filters.Status);
+        if (filters.Status.HasValue)
+            query = query.Where(x => x.Status == (ETicketStatus)filters.Status);
 
-        if (!string.IsNullOrWhiteSpace(filters.Priority))
-            query = query.Where(x => x.Priority.ToString() == filters.Priority);
+        if (filters.Priority.HasValue)
+            query = query.Where(x => x.Priority == (ETicketPriority)filters.Priority);
 
-        if (!string.IsNullOrWhiteSpace(filters.AssignedUserId))
+        if (!string.IsNullOrWhiteSpace(filters.ResponsableUserId))
             query = query.Where(x =>
-                x.AssignedUserId != null &&
-                x.AssignedUserId.ToString() == filters.AssignedUserId);
+                x.ResponsableUserId != null &&
+                x.ResponsableUserId.ToString() == filters.ResponsableUserId);
 
         if (!string.IsNullOrWhiteSpace(filters.Search))
             query = query.Where(x =>
-                x.Title.Contains(filters.Search) ||
-                x.Description.Contains(filters.Search));
+                x.Title.ToLower().Contains(filters.Search.ToLower()) ||
+                x.Description.ToLower().Contains(filters.Search.ToLower()));
 
         return query;
     }

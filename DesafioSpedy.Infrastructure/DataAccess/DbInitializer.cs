@@ -1,6 +1,6 @@
 ﻿using DesafioSpedy.Domain.Crypto;
-using DesafioSpedy.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using DesafioSpedy.Infrastructure.Data.Seed;
+using DesafioSpedy.Infrastructure.DataAccess.Seed;
 
 namespace DesafioSpedy.Infrastructure.DataAccess;
 
@@ -10,17 +10,7 @@ public static class DbInitializer
             DesafioSpedyDbContext _db,
             IPasswordEncryptor passwordEncryptor)
     {
-        if (await _db.User.AnyAsync())
-            return;
-
-        var adminUser = new User(
-            id: Guid.NewGuid(),
-            name: "Admin",
-            email: "admin@admin.com",
-            passwordHash: passwordEncryptor.Hash("123456")
-        );
-
-        _db.User.Add(adminUser);
-        await _db.SaveChangesAsync();
+        await UserSeed.SeedAsync(_db, passwordEncryptor);
+        await TicketSeed.SeedAsync(_db);
     }
 }

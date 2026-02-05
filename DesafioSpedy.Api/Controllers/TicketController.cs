@@ -19,7 +19,7 @@ public class TicketController(TicketService _ticketService) : ControllerBase
     {
         var result = _ticketService.GetAllAsync(filters);
 
-        return Created(string.Empty, result);
+        return Ok(result);
     }
 
     [HttpPost]
@@ -32,6 +32,27 @@ public class TicketController(TicketService _ticketService) : ControllerBase
 
         return Created(string.Empty, result);
     }
+
+    [HttpPatch("avancar-status")]
+    public async Task<IActionResult> Avancar(
+        Guid Id
+    )
+    {
+        await _ticketService.AvancarTicket(Id);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Update(
+        [FromBody] UpdateTicketDto dto
+    )
+    {
+        var result = await _ticketService.Update(dto);
+
+        return Created(string.Empty, result);
+    }
+
 
     [HttpDelete("{Id}")]
     public async Task<IActionResult> Delete(

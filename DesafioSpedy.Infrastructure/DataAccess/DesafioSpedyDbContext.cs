@@ -14,6 +14,19 @@ public class DesafioSpedyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Ticket>(entity =>
+        {
+            entity.HasOne(t => t.Responsable)
+                .WithMany()
+                .HasForeignKey(t => t.ResponsableUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(t => t.Creator)
+                .WithMany()
+                .HasForeignKey(t => t.CreatorUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DesafioSpedyDbContext).Assembly);
     }
 }
